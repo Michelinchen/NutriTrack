@@ -1,6 +1,8 @@
 package htw.webtech.NutriTrack;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -8,13 +10,20 @@ import java.util.List;
 @RestController
 public class MealController {
 
+    private final MealService service;
+
+    public MealController(MealService service) {
+        this.service = service;
+    }
+
     @GetMapping("/meals")
     public List<MealEntry> getAllMeals(){
-        return List.of(
-                new MealEntry("Pizza", new Macronutrient(50, 100, 30)),
-                new MealEntry("Cheeseburger", new Macronutrient(100, 80, 50)),
-                new MealEntry("Pasta", new Macronutrient(50.0, 150.0, 20.0))
-        );
+        return service.getAllMeals();
+    }
+
+    @PostMapping("/meals")
+    public MealEntry createMeal(@RequestBody MealEntry meal){
+        return service.save(meal);
     }
 
 }
