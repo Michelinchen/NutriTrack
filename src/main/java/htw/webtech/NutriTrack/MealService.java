@@ -19,4 +19,8 @@ public class MealService {
     public MealEntry save(MealEntry mealEntry){
         return repository.save(mealEntry);
     }
+
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
 }
