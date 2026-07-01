@@ -11,6 +11,7 @@ public class MealEntry {
     private String name;
     @Embedded
     private Macronutrient macro;
+    private boolean favorite;
 
     public MealEntry() {}
 
@@ -29,9 +30,17 @@ public class MealEntry {
         return macro;
     }
 
+    public boolean isFavorite() {
+        return favorite;
+    }
+
     public void setId(Long id) {this.id = id;}
 
     public void setName(String name) {this.name = name;}
 
     public void setMacro(Macronutrient macro) {this.macro = macro;}
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 }

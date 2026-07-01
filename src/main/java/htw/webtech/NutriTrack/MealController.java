@@ -29,4 +29,9 @@ public class MealController {
     public void deleteMeal(@PathVariable Long id){
         service.delete(id);
     }
+
+    @PutMapping("/meals/{id}")
+    public MealEntry updateMeal(@PathVariable Long id, @RequestBody MealEntry meal){
+        return service.update(id, meal);
+    }
 }

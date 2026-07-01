@@ -1,6 +1,8 @@
 package htw.webtech.NutriTrack;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -20,7 +22,14 @@ public class MealService {
         return repository.save(mealEntry);
     }
 
-    public void delete(Long id){
-        repository.deleteById(id);
+    public void delete(Long id){ repository.deleteById(id); }
+
+    public MealEntry update(Long id, MealEntry updated){
+        MealEntry existing = repository.findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Meal not found"));
+        existing.setName(updated.getName());
+        existing.setMacro(updated.getMacro());
+        existing.setFavorite(updated.isFavorite());
+        return repository.save(existing);
     }
 }
